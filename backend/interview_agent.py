@@ -25,7 +25,7 @@ class LLMClient:
         
         # Initialize Llama model
         self.llm = Llama(
-            model_path="llama3:latest",  # Your local Llama 3 model path
+            model_path="models/llama3.ggu",  # Your local Llama 3 model path
             n_ctx=4096,  # Context window
             n_threads=4  # Number of CPU threads to use
         )
