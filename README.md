@@ -6,6 +6,13 @@
 
 The AI-Powered Excel Mock Interviewer is a production-ready solution that automates technical screening for Excel proficiency. Built with modern AI and web technologies, it provides consistent, scalable, and intelligent assessment of Excel skills for Finance, Operations, and Data Analytics roles.
 
+## 📋 Submission Notes
+
+This project has been cleaned up for submission:
+- Removed unused dependencies from backend (anthropic, openai)
+- Cleaned up temporary files (__pycache__)
+- Removed node_modules (can be reinstalled with npm install)
+
 ## 📁 Project Structure
 
 ```

@@ -314,6 +314,9 @@ async def end_interview_session(session_id: str):
 @app.websocket("/ws/interview/{session_id}")
 async def websocket_interview_endpoint(websocket: WebSocket, session_id: str):
     """Handle real-time interview conversation via WebSocket"""
+    # Accept the WebSocket connection first
+    await websocket.accept()
+    # Then connect to the connection manager
     await connection_manager.connect(websocket, session_id)
     
     try:

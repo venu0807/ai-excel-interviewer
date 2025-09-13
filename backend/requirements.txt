@@ -1,8 +1,4 @@
 fastapi
 uvicorn
 python-dotenv
-google-genai>=1.0.0
-# Retain existing dependencies
-anthropic
-openai
-pip install --upgrade llama-cpp-python llama-index-llms-llama-cpp
+google-generativeai>=1.0.0

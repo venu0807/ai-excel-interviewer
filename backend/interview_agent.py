@@ -18,31 +18,29 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 class LLMClient:
-    """Client for interacting with Local Llama 3 Model"""
+    """Client for interacting with Google AI Studio API (Gemini)"""
     
     def __init__(self):
-        from llama_cpp import Llama
+        import google.generativeai as genai
         
-        # Initialize Llama model
-        self.llm = Llama(
-            model_path="models/llama3.ggu",  # Your local Llama 3 model path
-            n_ctx=4096,  # Context window
-            n_threads=4  # Number of CPU threads to use
-        )
+        # Get API key from environment variable
+        api_key = os.getenv("GEMINI_API_KEY", "AIzaSyBbrzGKSU0x1xaTtWRQeOBv7wXBM-IfNT4")
+        model_name = os.getenv("MODEL_NAME", "gemini-2.5-flash")
         
-    async def generate_response(self, prompt: str, model: str = "llama") -> str:
-        """Generate response using local Llama 3"""
+        # Configure the Gemini API
+        genai.configure(api_key=api_key)
+        self.model = genai.GenerativeModel(model_name)
+        
+    async def generate_response(self, prompt: str, model: str = "gemini") -> str:
+        """Generate response using Google AI Studio API (Gemini)"""
         try:
             response = await asyncio.to_thread(
-                self.llm.create_completion,
-                prompt,
-                max_tokens=1000,
-                temperature=0.7,
-                stop=["User:", "Assistant:"]
+                self.model.generate_content,
+                prompt
             )
-            return response['choices'][0]['text'].strip()
+            return response.text.strip()
         except Exception as e:
-            logger.error(f"Error generating Llama response: {str(e)}")
+            logger.error(f"Error generating Gemini response: {str(e)}")
             return "I encountered an error. Please try again."
 
 class ExcelEvaluator:

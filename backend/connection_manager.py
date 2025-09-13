@@ -18,8 +18,8 @@ class ConnectionManager:
         self.session_connections: Dict[str, str] = {}  # session_id -> connection_id
     
     async def connect(self, websocket: WebSocket, session_id: str):
-        """Accept a new WebSocket connection"""
-        await websocket.accept()
+        """Register a new WebSocket connection"""
+        # WebSocket is already accepted in the endpoint
         connection_id = id(websocket)
         
         self.active_connections[connection_id] = websocket
